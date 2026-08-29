@@ -75,9 +75,14 @@ class SdlWindow : public graphic::IWindow2 {
         }
 
         ~SdlWindow() {
-            if (!_cursor)
-                SDL_ShowCursor(SDL_ENABLE);
+            /* On part : si c'est nous qui l'avions cache, on le rend. Le
+             * pump suivant le recachera si la souris se trouve sur une
+             * autre fenetre qui le demande. */
             registry().erase(_id);
+            if (!_cursor && !shown()) {
+                shown() = true;
+                SDL_ShowCursor(SDL_ENABLE);
+            }
             if (_renderer)
                 SDL_DestroyRenderer(_renderer);
             if (_window)
@@ -115,12 +120,21 @@ class SdlWindow : public graphic::IWindow2 {
 
         void setFrameLimit(int32_t limit) override { _frameLimit = limit; }
 
-        /* SDL_ShowCursor est GLOBAL au processus, pas propre a la fenetre :
-         * comme raylib, on remet le pointeur en partant. */
-        void setMouseVisibility(bool visible) override {
-            _cursor = visible;
-            SDL_ShowCursor(visible ? SDL_ENABLE : SDL_DISABLE);
-        }
+        /**
+         * @brief Cache ou montre le pointeur SUR CETTE FENETRE.
+         *
+         * SDL n'a pas de curseur par fenetre : ShowCursor agit sur le
+         * processus entier. Cacher le pointeur pour le jeu le cachait donc
+         * aussi sur la borne, la ou sfml - qui pose un curseur sur la
+         * fenetre - se comportait correctement.
+         *
+         * On ne fait donc qu'ENREGISTRER le souhait ici. C'est pump() qui
+         * l'applique, et seulement celui de la fenetre que la souris
+         * survole : le pointeur disparait en entrant dans le jeu et revient
+         * en le quittant, ce qui est exactement ce qu'un curseur par
+         * fenetre donnerait.
+         */
+        void setMouseVisibility(bool visible) override { _cursor = visible; }
 
         int32_t getDelta() override { return _delta; }
 
@@ -205,6 +219,10 @@ class SdlWindow : public graphic::IWindow2 {
         static void pump() {
             SDL_Event event;
 
+            /* Le curseur AVANT la file : l'etat suit le survol, et le survol
+             * a pu changer depuis la frame precedente meme sans evenement. */
+            applyCursor(SDL_GetMouseFocus());
+
             while (SDL_PollEvent(&event)) {
                 const uint32_t target = windowOf(event);
 
@@ -220,6 +238,41 @@ class SdlWindow : public graphic::IWindow2 {
                     continue;   //une fenetre deja detruite : l'evenement tombe
                 found->second->push(event);
             }
+        }
+
+        /**
+         * @brief Applique le souhait de la fenetre survolee, et d'elle seule.
+         *
+         * L'unique endroit du vendor qui touche au curseur. Comme il est
+         * commun au processus, on garde ce qu'on a demande en dernier et on
+         * ne rappelle SDL que si ca change - sinon on repeindrait le
+         * pointeur soixante fois par seconde pour rien.
+         *
+         * Souris hors de toute fenetre a nous : on ne touche a rien. Le
+         * pointeur appartient alors au bureau.
+         */
+        static void applyCursor(SDL_Window *focused) {
+            if (!focused)
+                return;
+
+            const auto found = registry().find(SDL_GetWindowID(focused));
+
+            if (found == registry().end())
+                return;
+
+            const bool wanted = found->second->_cursor;
+
+            if (wanted == shown())
+                return;
+            shown() = wanted;
+            SDL_ShowCursor(wanted ? SDL_ENABLE : SDL_DISABLE);
+        }
+
+        /** @brief Ce que le processus affiche en ce moment. */
+        static bool &shown() {
+            static bool visible = true;
+
+            return visible;
         }
 
         /** @brief La fenetre visee, ou 0 quand l'evenement s'adresse a tous. */
