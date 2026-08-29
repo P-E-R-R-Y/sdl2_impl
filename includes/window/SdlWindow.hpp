@@ -75,6 +75,8 @@ class SdlWindow : public graphic::IWindow2 {
         }
 
         ~SdlWindow() {
+            if (!_cursor)
+                SDL_ShowCursor(SDL_ENABLE);
             registry().erase(_id);
             if (_renderer)
                 SDL_DestroyRenderer(_renderer);
@@ -112,6 +114,13 @@ class SdlWindow : public graphic::IWindow2 {
         }
 
         void setFrameLimit(int32_t limit) override { _frameLimit = limit; }
+
+        /* SDL_ShowCursor est GLOBAL au processus, pas propre a la fenetre :
+         * comme raylib, on remet le pointeur en partant. */
+        void setMouseVisibility(bool visible) override {
+            _cursor = visible;
+            SDL_ShowCursor(visible ? SDL_ENABLE : SDL_DISABLE);
+        }
 
         int32_t getDelta() override { return _delta; }
 
@@ -289,6 +298,7 @@ class SdlWindow : public graphic::IWindow2 {
         SDL_Renderer *_renderer = nullptr;
         uint32_t _id = 0;
         bool _open = true;
+        bool _cursor = true;   ///< le pointeur, pour le remettre en partant
 
         /* Les evenements de la frame. Rempli par pump(), vide par endDraw() :
          * entre les deux, tout le monde y lit la meme chose. */
