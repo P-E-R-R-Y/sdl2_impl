@@ -1,23 +1,23 @@
-# sdl2_impl — journal
+# sdl2_impl — changelog
 
-Marqueurs : 🟢 ajout · 🔴 rupture · 🔵 correctif · ⚪ interne ou doc · 🟡 propose
-dans le plan, code non ecrit.
+Markers: 🟢 added · 🔴 breaking · 🔵 fix · ⚪ internal or docs · 🟡 proposed
+in the plan, no code written yet.
 
 ## v0.1.0
 
-- 🟢 remplit `graphic2` + `audio`
-- 🟢 point d'entree unique `getModules()`
-- 🟢 cibles SHARED et STATIC (la STATIC recompile `sources/sdl2.cpp` pour
-  un consommateur qui n'en a pas besoin — constate, pas corrige)
+- 🟢 fills `graphic2` + `audio`
+- 🟢 single entry point `getModules()`
+- 🟢 SHARED and STATIC targets (STATIC recompiles `sources/sdl2.cpp` for
+  a consumer that doesn't need it — known, not fixed)
 
-### Faille mesuree, pas corrigee
+### Measured failure, not fixed
 
-- 🔴 `createTexture`/`createSoundBuffer` etc. rendent un objet mort
-  (`isReady()==false`) au lieu de `nullptr` quand le chargement echoue.
-  ici, `isReady()==false` est propage sans crash — sdl2 est le vendor le plus tolerant des quatre
+- 🔴 `createTexture`/`createSoundBuffer` etc. return a dead object
+  (`isReady()==false`) instead of `nullptr` when loading fails.
+  here, `isReady()==false` just propagates without a crash — sdl2 is the most forgiving of the four
 
-## Propose, pas ecrit
+## Proposed, not written
 
-- 🟡 `claims()` : rien — sdl2 passe par Metal, aucune ressource a confisquer
-- 🟡 cible STATIC → INTERFACE, zero object code
-- 🟡 des exemples : n'en a toujours aucun
+- 🟡 `claims()`: nothing — sdl2 goes through Metal, nothing to claim
+- 🟡 STATIC target → INTERFACE, zero object code
+- 🟡 examples: still has none
