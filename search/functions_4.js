@@ -1,0 +1,23 @@
+var searchData=
+[
+  ['getaudiomodule_0',['getAudioModule',['../group__sdl2.html#ga29863216579b4f4dd9880ca262d13c81',1,'sdl2.cpp']]],
+  ['getaxismovement_1',['getAxisMovement',['../classSdlGamepad.html#ac87d6b868d9ee2cd8b9fa7cfd9d2a9c2',1,'SdlGamepad']]],
+  ['getbounds_2',['getBounds',['../classSdlSprite.html#a860abe97ae1d6774a9e5626405a19820',1,'SdlSprite']]],
+  ['getcolor_3',['getColor',['../classSdlPolygon.html#a4cf64af04a20136884a3a590677435ba',1,'SdlPolygon']]],
+  ['getdelta_4',['getDelta',['../classSdlWindow.html#a9febbc476e129e0d96069034a1a1b018',1,'SdlWindow']]],
+  ['getfontsize_5',['getFontSize',['../classSdlText.html#af9e69ffe4d57fe799163d547bf310765',1,'SdlText']]],
+  ['getgraphic2module_6',['getGraphic2Module',['../group__sdl2.html#gab25a5f6b9d06c0aa6b8ee945c3138f18',1,'sdl2.cpp']]],
+  ['getlength_7',['getlength',['../classSdlMusic.html#aee0f5c06b795e8c1443b5c448af1c3fc',1,'SdlMusic::getLength()'],['../classSdlSoundBuffer.html#a404d65cc1fc49132ff1dd7332b82624e',1,'SdlSoundBuffer::getLength()']]],
+  ['getloop_8',['getLoop',['../classSdlMusic.html#af99cc332da12431c4edc95cf962679e7',1,'SdlMusic']]],
+  ['getmodules_9',['getModules',['../group__sdl2.html#ga433ca9b6c0b6dd147041a5a17228570e',1,'sdl2.cpp']]],
+  ['getmousewheelmove_10',['GetMouseWheelMove',['../group__sdl2.html#ga90a0264525a1d0e85645fa9697fde004',1,'SdlMouse']]],
+  ['getpoints_11',['getPoints',['../classSdlPolygon.html#ab2733adf3fdd46c063ef66d8aea73f4a',1,'SdlPolygon']]],
+  ['getposition_12',['getposition',['../group__sdl2.html#gafe501f7a92dbe444a135d2279b8e83f1',1,'SdlMouse::getPosition()'],['../classSdlMusic.html#ab6cc01e3536115923f2e7ab9474ea253',1,'SdlMusic::getPosition()'],['../classSdlWindow.html#a26e3f622953294d0102757fe6bc93691',1,'SdlWindow::getPosition()'],['../classSdlText.html#a4477a0fdaeb915d0966066f348cb679b',1,'SdlText::getPosition()'],['../classSdlSprite.html#a1508fd5b95acdfddaf9cf69273d4807c',1,'SdlSprite::getPosition()'],['../classSdlPolygon.html#abdc0afef6b61dbb6866db4650b5a2ca8',1,'SdlPolygon::getPosition()'],['../classSdlSound.html#a379ae20eb2b0d5743c810e79fff6626b',1,'SdlSound::getPosition()']]],
+  ['getrotation_13',['getrotation',['../classSdlSprite.html#af798061665fefe8897a57def03881740',1,'SdlSprite::getRotation()'],['../classSdlText.html#a2379fecdc5ec437a2946b4ef488d5d54',1,'SdlText::getRotation()']]],
+  ['getsize_14',['getsize',['../classSdlSprite.html#a679fcb0691c1ac24ed07bc7fad0a2f50',1,'SdlSprite::getSize()'],['../classSdlTexture.html#a20a6122807cf45fe2d5b062efff9c8fa',1,'SdlTexture::getSize()'],['../classSdlWindow.html#abfc8a52ecb70955a92f6a703a30a0f62',1,'SdlWindow::getSize()']]],
+  ['gettext_15',['getText',['../classSdlText.html#ab7ee26d2592fdd7192e74d0f16d933f0',1,'SdlText']]],
+  ['gettextcolor_16',['getTextColor',['../classSdlText.html#aa7abbd3838df2cb0e6a2e4e540785f3e',1,'SdlText']]],
+  ['gettime_17',['getTime',['../classSdlMusic.html#af2201f790221be9d96c2f6d15ef3ee6d',1,'SdlMusic']]],
+  ['getvelocity_18',['getvelocity',['../classSdlMusic.html#ad125071daec20d3c0a28e47bf34f383e',1,'SdlMusic::getVelocity()'],['../classSdlSound.html#aa13b2d8f7393f383ab235c528e47d03a',1,'SdlSound::getVelocity()']]],
+  ['getvolume_19',['getvolume',['../classSdlMusic.html#a30994158e786d9aa379f6668e8f01756',1,'SdlMusic::getVolume()'],['../classSdlSound.html#afda1fbb49c4111d552baf9c5335fbb01',1,'SdlSound::getVolume()']]]
+];
